@@ -1,3 +1,10 @@
+:root {
+    --bg: white;
+    --text: #333;
+    --btn-bg: #764ba2;
+    --accent: #667eea;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #667eea, #764ba2);
@@ -6,24 +13,52 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
-    padding: 1rem; /* Add padding for edge-to-edge screens */
+    padding: 1rem;
+}
+
+body.dark {
+    --bg: #1a1a1a;
+    --text: #fff;
+    --btn-bg: #9b59b6;
 }
 
 .container {
-    background: white;
-    padding: 1.5rem; /* Reduced padding slightly for smaller screens */
+    background: var(--bg);
+    color: var(--text);
+    padding: 1.5rem;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px; /* Keeps it constrained on larger screens */
-    box-sizing: border-box; /* Ensures padding doesn’t add to width */
+    max-width: 400px;
+    box-sizing: border-box;
 }
 
 h1 {
     text-align: center;
-    color: #333;
     margin-bottom: 1.5rem;
-    font-size: 1.8rem; /* Slightly smaller for mobile */
+    font-size: 1.8rem;
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin: 1rem 0 0.5rem;
+}
+
+#theme-toggle, #voice-btn {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    background: var(--btn-bg);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    min-height: 48px;
+}
+
+#theme-toggle:hover, #voice-btn:hover {
+    background: #5a3b7d;
 }
 
 .input-group {
@@ -33,29 +68,27 @@ h1 {
 label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #555;
     font-weight: bold;
     font-size: 1rem;
 }
 
-input[type="number"] {
+input[type="number"], select {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 1rem;
-    transition: border-color 0.3s;
     box-sizing: border-box;
 }
 
-input[type="number"]:focus {
+input[type="number"]:focus, select:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: var(--accent);
 }
 
 .service-buttons {
     display: flex;
-    flex-wrap: wrap; /* Allows wrapping if needed */
+    flex-wrap: wrap;
     gap: 0.5rem;
 }
 
@@ -68,7 +101,7 @@ input[type="number"]:focus {
     cursor: pointer;
     transition: all 0.3s;
     font-size: 0.9rem;
-    min-height: 48px; /* Minimum touch target size */
+    min-height: 48px;
 }
 
 .service-btn:hover {
@@ -76,74 +109,66 @@ input[type="number"]:focus {
 }
 
 .service-btn.active {
-    background: #667eea;
+    background: var(--accent);
     color: white;
-    border-color: #667eea;
-}
-
-.result-group {
-    margin: 1.5rem 0;
+    border-color: var(--accent);
 }
 
 .result-group p {
     margin: 0.5rem 0;
     font-size: 1.1rem;
-    color: #333;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.result-group p.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .result-group span {
     font-weight: bold;
-    color: #667eea;
+    color: var(--accent);
 }
 
-#calculate-btn {
-    width: 100%;
-    padding: 1rem;
-    background: #764ba2;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background 0.3s;
-    min-height: 48px; /* Minimum touch target size */
+.history-group ul {
+    list-style: none;
+    padding: 0;
+    font-size: 0.9rem;
 }
 
-#calculate-btn:hover {
-    background: #5a3b7d;
+.history-group li {
+    margin: 0.5rem 0;
 }
 
-/* Mobile-specific adjustments */
+/* Mobile Adjustments */
 @media (max-width: 600px) {
     .container {
-        padding: 1rem; /* Smaller padding on mobile */
-        max-width: 100%; /* Full width on small screens */
-        margin: 0 0.5rem; /* Small margin for edge spacing */
+        padding: 1rem;
+        max-width: 100%;
+        margin: 0 0.5rem;
     }
 
     h1 {
-        font-size: 1.5rem; /* Smaller heading */
+        font-size: 1.5rem;
     }
 
     .service-buttons {
-        flex-direction: column; /* Stack buttons vertically */
-        gap: 0.75rem; /* Larger gap for better spacing */
+        flex-direction: column;
+        gap: 0.75rem;
     }
 
     .service-btn {
-        width: 100%; /* Full width for easier tapping */
-        font-size: 1rem; /* Slightly larger text */
+        width: 100%;
+        font-size: 1rem;
     }
 
-    input[type="number"] {
-        font-size: 1rem; /* Ensure readable on mobile */
+    input[type="number"], select {
+        font-size: 1rem;
     }
 
     .result-group p {
-        font-size: 1rem; /* Slightly smaller text */
-    }
-
-    #calculate-btn {
-        font-size: 1rem; /* Adjust button text size */
+        font-size: 1rem;
     }
 }
